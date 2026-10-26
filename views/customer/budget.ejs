@@ -1,0 +1,55 @@
+<% include ../partials/customerHeader %>
+<section id="Dashboard" class="dash_banner_area">
+    <div class="container">
+        <%if(project==null||contractor==null){%>
+            <div class="jumbotron ">
+                <p class="lead">Hi <%=currentUser.username%> Sorry there are no details right now, if this repeats please contact us </p>
+            </div>
+       <%} else{%>
+
+            <% if(!project.budget.length){%>
+                <div class="jumbotron ">
+                    <p class="lead">Please Contact your contractor</p>
+                </div>
+            <%} %>
+
+            <div class="container">
+                <h2>Budget Plan</h2> 
+                <div class="row">
+                    <div class="col-lg-6">
+                        <h3 class="text-success">Total Investment:<%=amount.invest%></h3>
+                    </div>
+                    <div class="col-lg-6">
+                     <h3 class="text-danger">Total expense:<%=amount.expense%></h3>
+                 </div>
+                </div>
+                <hr class="my-4">
+                <% project.budget.forEach(function(budget){%>
+                 <div class="container">
+                     <div class="row">
+                         <div class="col-lg-3">
+                             <%if(budget.type==="Income"){%>
+                                 <h4 class="text-success">Type:<%=budget.type%></h4>
+                             <%} else{%>
+                                 <h4 class="text-danger">Type:<%=budget.type%></h4>
+                             <%}%>
+                         </div><div class="col-lg-4">
+                             <h4>Description:<%=budget.description%></h4>
+                         </div>
+                         <div class="col-lg-3">
+                             <h4>Value:<%=budget.value%></h4>
+                         </div>
+                         <div class="col-lg-2">
+                             <a class="btn btn-primary" href="../<%=budget.budgetImage%>" role="button">Image</a>
+                         </div>    
+                     </div>
+                <hr class="my-4">
+                 </div>
+                <%})%>
+                <h3 class="text-success">Amount left:<%=amount.total%></h3>
+         </div>
+        <%}%>
+    </div>
+</section>        
+
+<% include ../partials/footer %>

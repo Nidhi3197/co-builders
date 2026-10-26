@@ -1,0 +1,87 @@
+<% include ../partials/customerHeader %>
+<section id="project" class="project_area">
+    <div class="container">
+        <div class="project_header">
+            <h3><a href="/customer/<%=currentUser._id%>/project/edit"><i class="fas fa-edit"></i></a>Project</h3>
+        </div>
+        <% if(currentUser.requirements==null){%>
+            <div class="jumbotron ">
+                <p class="lead">Hi <%=currentUser.username%> please fill in your requirement details </p>
+                <a class="btn btn-primary btn-lg" href="/customer/<%=currentUser._id%>/project/edit" role="button">Edit</a>
+            </div>
+            <%} else {%>
+        <div class=" card project_content">
+                <div class="card-body  profile_details align-items-center">
+                    
+                        <h4>Project Requirements</h4>
+               
+                            <% if(currentUser.location){ %>
+                                <p>Location of Construction site:<%= currentUser.location; %></p>    
+                            <%} %>
+                            <% if(currentUser.budget){ %>
+                                <p>Budget range:<%= currentUser.budget; %></p>    
+                            <%} %>
+                            <% if(currentUser.area){ %>
+                                <p>Total area:<%= currentUser.area; %></p>    
+                            <%} %>
+                            <% if(currentUser.requirements){ %>
+                                <p>Requirement Details:<%= currentUser.requirements; %></p>    
+                            <%} %>
+                            <% if(currentUser.reqselect){ %>
+                                <p>Home Type:<%= currentUser.reqselect; %></p>    
+                            <%} %>
+                            <% if(currentUser.bathRoomreq){ %>
+                                <p>Bathroom Specification:<%= currentUser.bathRoomreq; %></p>    
+                            <%} %>
+                            <% if(currentUser.prayerRoomreq){ %>
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="defaultChecked2" checked disabled>
+                                    <label class="custom-control-label" for="defaultChecked2">Prayer Room</label>
+                                </div>
+                            <%} %>
+                            <% if(currentUser.studyRoomreq){ %>
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="defaultChecked2" checked disabled>
+                                    <label class="custom-control-label" for="defaultChecked2">Study Room</label>
+                                </div>                           
+                            <%} %>
+                            <% if(currentUser.diningRoomreq){ %>
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="defaultChecked2" checked disabled>
+                                    <label class="custom-control-label" for="defaultChecked2">Dining Room</label>
+                                </div>                           
+                            <%} %>
+                            <% if(currentUser.workAreareq){ %>
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="defaultChecked2" checked disabled>
+                                    <label class="custom-control-label" for="defaultChecked2">Work Area</label>
+                                </div>                           
+                            <%} %>
+                            <% if(currentUser.utilityRoomreq){ %>
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="defaultChecked2" checked disabled>
+                                    <label class="custom-control-label" for="defaultChecked2">Utility Room</label>
+                                </div>                           
+                            <%} %>
+                            <% if(currentUser.carPorchreq){ %>
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="defaultChecked2" checked disabled>
+                                    <label class="custom-control-label" for="defaultChecked2">Car Porch</label>
+                                </div>                           
+                            <%} %>
+                            <% if(currentUser.additionalreq){ %>
+                                <p>Other additional requirement:<%= currentUser.additionalreq; %></p>    
+                            <%} %>
+                            <%if(currentUser.projectStatus){%>
+                                <a href=""><input type="submit" class="btn btn-primary btn-lg disabled"  value="Edit"></a>
+                            <%} else if(!currentUser.projectStatus){%>
+                                <a href="/customer/<%=currentUser._id%>/project/edit"><input type="submit" class="btn btn-primary btn-lg" value="Edit"></a>
+                            <%}%>
+                    </div>
+                </div>
+            <%}%>    
+        </div>
+    </div>
+</section>
+
+<% include ../partials/footer %>

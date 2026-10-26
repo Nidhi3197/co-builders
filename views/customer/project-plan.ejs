@@ -1,0 +1,60 @@
+<% include ../partials/customerHeader %>
+<section id="customer" class="plan_area">
+    <div class="container">
+        <%if(project==null||contractor==null){%>
+            <div class="jumbotron ">
+                <p class="lead">Hi <%=currentUser.username%> Sorry there are no details right now, if this repeats please contact us </p>
+            </div>
+       <%}else if(project.overallPlan==null){%>
+    
+        <div class="jumbotron ">
+            <p class="lead">Sorry, <%=contractor.username%> has not made a plan yet, please contact him  </p>
+        </div>
+        <%} else{%>
+       
+            <%if(project.contractorStatus && !project.customerStatus){%>
+                <div class=" card plan_content_area">
+                    <div class="card-body align-items-center">  
+                        <h3><%=contractor.username%> Plan:</h3>
+                        <p><%=project.overallPlan%></p>
+                    </div>
+                    <p class="text-muted"><span class="font-weight-bold">Note: </span>Please make sure that you meetup with the contractor before finalising and accepting the plan</p>
+
+                    <div class="dash_button ">  
+                        <form action="/customer/<%=project._id%>/plan/accept" method="post">          
+                            <button type="submit" class="btn btn-outline-success btn-accept"><i class="far fa-check-circle"></i></button>
+                        </form>
+                        <form action="/customer/<%=project._id%>/plan/reject" method="post">
+                            <button type="submit" class="btn btn-outline-danger btn-reject"><i class="fas fa-times"></i></button>
+                        </form>
+                    </div>
+                </div> 
+            <%}else if(!(project.customerStatus)&&!(project.contractorStatus)){%>
+                <div class=" card customer_dash_content">
+                    <div class="card-body align-items-center">
+                        <h3><%=contractor.username%> Plan:</h3>
+                        <p><%=project.overallPlan%></p>
+                    </div>
+                    <div class="cont-accept">
+                        <p class=" text-danger"><i class="far fa-check-square"></i>Plan Rejected waiting for further updation</p>
+                    </div>
+                </div>    
+            <%} else  if(project.customerStatus){%>
+                <div class=" card customer_dash_content">
+                    <div class="card-body align-items-center">
+                        <h3><%=contractor.username%> Plan:</h3>
+                        <p><%=project.overallPlan%></p>
+                        <a href="/customer/<%=project._id%>/schedule"><input type="submit" class="btn btn-primary btn-lg" value="View Schedule"></a>
+                    
+                    </div>
+                    <div class="cont-accept">
+                        <p class=" text-success"><i class="far fa-check-square"></i>Plan Accepted</p>
+                    </div>
+                </div>
+            <%}%>            
+        </div>   
+        <%}%>
+ 
+</section>
+
+<% include ../partials/footer %>

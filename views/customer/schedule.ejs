@@ -1,0 +1,65 @@
+<% include ../partials/customerHeader %>
+<section id="customer" class="plan_area">
+    <div class="container">
+        <% if(!project.planDate.length){%>
+            <div class="jumbotron ">
+                <p class="lead">No Schedule so far please contact the contractor</p>
+            </div>
+        <%}%>
+            <div class="plan_fullcontent">
+                <div class="container ">
+
+                <p class="lead">Task Schedule <a id="add" href="#"></a></p>
+                    <hr class="my-4">  
+                    <div class="row plan_heading">
+                        <div class="col-lg-3">
+                            <h3>Date</h3>
+                        </div>
+                        <div class="col-lg-9">
+                            <h3>Task to Do</h3>
+                        </div>
+                    </div>
+                    <hr class="my-1">  
+                    
+                    <% project.planDate.forEach(function(plan){%>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <h4><%=plan.day%></h4>
+                        </div>
+                        <div class="col-lg-4">
+                            <h4><%=plan.plan%></h4>
+                        </div>
+                        <% if(!plan.status){%>
+                            <div class="col-lg-2">
+                            
+                                <span class="p-2 mb-2 badge badge-pill badge-danger">Not Complete</span>
+                            </div>
+                        <%}else{%>
+                            <div class="col-lg-2">
+                                <span class="p-3 mb-2 badge badge-pill badge-success">Complete</span>
+
+
+                            </div>
+                        <%}%>
+                        <%if(plan.scheduleImage){%>
+                            <div class="col-lg-2">
+                                <a class="btn btn-primary" href="../<%=plan.scheduleImage%>" role="button">Image</a>
+                            </div>
+                        <%}%>
+                    </div>
+               <hr class="my-4">
+
+                    <%})%>
+                    <p class="text-muted">Contact the Contractor if you want to change something</p>
+
+                </div>    
+            </div>
+        
+    </div>
+</section>    
+
+
+<% include ../partials/footer %>
+
+
+

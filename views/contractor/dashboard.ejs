@@ -1,0 +1,67 @@
+<% include ../partials/contractorHeader %>
+<!--================Header Menu Area =================-->
+<section id="Dashboard" class="dash_banner_area">
+        <div class="container">
+            <% if(currentUser.criteria==null){%>
+                <div class="jumbotron ">
+                    <p class="lead">Hi <%=currentUser.username%> please fill in your requirement details </p>
+                    <a class="btn btn-primary btn-lg" href="/contractor/<%=currentUser._id%>/profile/edit" role="button">Edit</a>
+                </div>
+            <%} else {%>
+            
+         
+            <% if(currentUser.customer.length==0){ %>
+            <div class="jumbotron ">
+                <p class="lead">Sorry there are no customers to display right now, come back later </p>
+            </div>
+           
+            <%}else if(currentUser.customer.length==1) { %>
+                <h1>List of Customers that contacted</h1>
+                <div class=" card contractor_dash_content">
+                    <div class="card-body align-items-center">  
+                        <h3>Name: <%=customerDetail.name%></h3>
+                        <p>user name: <%=customerDetail.username%></p>
+                        <p>Email: <%=customerDetail.email%></p>
+                        <p>Mobile: <%=customerDetail.mobile%></p>
+                        <p>Requirements: <%=customerDetail.requirements%></p>
+                        <!-- <a href="/customer/contractor//"><input type="submit" class="btn btn-primary btn-lg" value="See More"> -->
+                        <!-- </a> -->
+                        
+                    </div>
+                    <div class="dash_button ">  
+                        <form action="/contractor/dashboard/<%=customerDetail._id%>/accept" method="post">          
+                            <button type="submit" class="btn btn-outline-success btn-accept"><i class="far fa-check-circle"></i></button>
+                        </form>
+                        <form action="/contractor/dashboard/<%=customerDetail._id%>/reject" method="post">
+                            <button type="submit" class="btn btn-outline-danger btn-reject"><i class="fas fa-times"></i></button>
+                        </form>
+                    </div>
+                </div> 
+            <%} else {%>
+            <%customerDetail.forEach(function(customerDetail){ %>
+
+         
+            <div class=" card contractor_dash_content">
+                <div class="card-body align-items-center">
+                    <h3>Name: <%=customerDetail.name%></h3>
+                    <p>user name: <%=customerDetail.username%></p>
+                    <p>Email: <%=customerDetail.email%></p>
+                    <p>Email: <%=customerDetail.mobile%></p>
+                    <p>Requirements: <%=customerDetail.requirements%></p>
+                   
+                    
+                </div>
+                <div class="dash_button ">
+                    <form action="/contractor/dashboard/<%=customerDetail._id%>/accept" method="post">
+                        <button type="button" class="btn btn-outline-success"><i class="far fa-check-circle"></i></button>
+                    </form>
+                    <form action="/contractor/dashboard/<%=customerDetail._id%>/reject" method="post">
+                        <button type="button" class="btn btn-outline-danger"><i class="fas fa-times"></i></button>
+                    </form>
+                </div>
+            </div> 
+            <%}); } }%>  
+        </div>
+    </section>
+
+<% include ../partials/contractorFooter %>

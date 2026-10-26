@@ -1,0 +1,51 @@
+<% include ../partials/contractorHeader %>
+<section id="contractor" class="plan_area">
+    <div class="container">
+        <%if(project==null||customer==null){%>
+            <div class="jumbotron ">
+                <p class="lead">Hi <%=currentUser.username%> Sorry there are no details right now, if this repeats please contact us </p>
+            </div>
+       <%} else{%>
+        <div class="plan_content">
+            <%if(!project.contractorStatus){%>
+                <div class="container">
+                    <p class="lead"><%=customer.username%></p>
+                    <hr class="my-4">
+                    <form action="/contractor/<%=project._id%>/plan" method="POST">
+                        <div class="form-group shadow-textarea">
+                            <label for="exampleFormControlTextarea6">Project Plan</label>
+                            <textarea class="form-control z-depth-1" id="exampleFormControlTextarea6" rows="3" name="project[overallPlan]" placeholder="Write something here..."><%= project.overallPlan %></textarea>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            <%}else if(project.contractorStatus && !project.customerStatus){%>
+                <div class="container">
+                    <p class="lead"><%=customer.username%></p>
+                    <hr class="my-4">
+                    <p><%=project.overallPlan%></p>
+                    <div class="cont-send">
+                        <p class=" text-warning"><i class="far fa-check-square"></i>Plan has been sent</p>
+                    </div>
+                </div>    
+            <%}else if(project.contractorStatus && project.customerStatus){%>
+                <div class="container">
+                <p class="lead"><%=customer.username%></p>
+                <hr class="my-4">
+                <p><%=project.overallPlan%></p>
+                <div class="cont-send">
+                        <p class=" text-success"><i class="far fa-check-square"></i>Plan Accepted</p>
+                </div>
+                
+                    <a href="/contractor/<%=project._id%>/schedule"><input type="submit" class="btn btn-primary btn-lg" value="View Schedule"></a>
+
+             <%}%>   
+            </div>         
+        </div>   
+        <%}%>
+    </div>
+</section>
+
+<% include ../partials/contractorFooter %>

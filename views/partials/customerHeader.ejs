@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="/vendors/owl-carousel/owl.carousel.min.css">
     <link rel="stylesheet" href="/vendors/animate-css/animate.css">
     <!-- main css -->
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/style-content.css">
     <link rel="stylesheet" href="/css/responsive.css">
 </head>
 <body>
@@ -28,9 +28,22 @@
     <div class="sidebar">
         <header>Co-builders</header>
         <ul>
-            <li><a href="/customer/<%=currentUser._id %>/profile">Profile</a></li>
             <li><a href="/customer/dashboard">Dashboard</a></li>
-            <li><a href="#">Project</a></li>
+            <li><a href="/customer/<%=currentUser._id %>/profile">Profile</a></li>
+            <li><a href="#">Project <i class="fa fa-caret-down"></i></b></a>
+                <ul>
+                    <li><a href="/customer/<%=currentUser._id %>/project">Requirements</a></li>
+                    <% if(currentUser.active_proj_cont.length ==0){%>
+
+                        <%} else {%>
+                            
+                                <li><a href="/customer/<%=currentUser._id%>/contractor">Contractor Details</a></li>
+                                 <%}%>
+                </ul>
+            </li>
+            <% if(currentUser.past_proj_cont.length!=0){%>
+                <li><a href="/customer/<%=currentUser._id%>/history">Past Projects</a></li>
+            <%}%>
             <li><a href="/customer/logout">Logout</a></li>
         </ul>
     </div>

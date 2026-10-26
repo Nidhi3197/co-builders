@@ -1,0 +1,50 @@
+<% include ./partials/dashHeader %>
+<!-- maybe use only a single file for chat , tomorrrow maybe-->
+
+<section id="Dashboard" class="dash_banner_area">
+    
+    <div class="container">
+        <br>
+        <div class="jumbotron">
+          <p id="chat_id" style="display: none;"><%=message._id%></p>
+            <h3 class="display-7"><%= otherUser.username %> Chat</h3>
+            <hr class="my-4">
+            <br>
+            <div class="chat-messages">
+              <div id="messages">
+                <!-- To print messages from the chat database-->
+                <% if(message.messages){%>
+                  <%message.messages.forEach(function(message){ %>
+                    <p class="lead"><%=message.username%>: <%=message.messages%></p>
+                 <% })} else {%>
+                
+                <!-- This will only happen when there is no message -->
+                <%}%>
+              </div>
+            </dvi>
+            <br>
+            <form id="chat-form" action="" method="">
+
+              <p id="username" class="lead" ><%= currentUser.username %></p>
+
+                <br>
+                <textarea id = "message" class="form-control" name="chat[messages]" placeholder="Your Message Here">
+                </textarea>
+                <br>
+                  <button id="send" class="btn btn-success">Send</button>
+            </form> 
+        </div>
+       
+    </div>
+</section>
+    
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.9.3/qs.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/chat.js"></script>
+<!-- <script>
+ 
+
+
+</script> -->
+<% include ./partials/dashFooter %>
